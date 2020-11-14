@@ -1,7 +1,9 @@
 import mysql = require('mysql')
 
 export default class MySQL{
-    private static _intancia: MySQL;
+    //esta es una nueva instancia de mysql
+    private static _instance: MySQL;
+
     conexion: mysql.Connection;
     conectado : boolean = false
     /**
@@ -19,6 +21,13 @@ export default class MySQL{
         this.ConectarDB()
         
     }
+
+
+    public static get instancia(){
+        return this._instance || ( this._instance = new this() )
+
+    }
+
     private ConectarDB(){
         this.conexion.connect((err:mysql.MysqlError)=>{
             if(err){
