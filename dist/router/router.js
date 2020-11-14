@@ -10,11 +10,10 @@ router.get('/heroes', function (req, res) {
 });
 router.get('/heroes/:id', function (req, res) {
     var id = req.params.id;
-    res.json([{
-            ok: true,
-            mensaje: 'todo esta bien api',
-            id: id
-        }
-    ]);
+    res.json({
+        ok: true,
+        mensaje: 'todo esta bien api',
+        id: id
+    });
 });
 exports.default = router;
