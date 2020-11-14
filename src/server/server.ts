@@ -1,4 +1,5 @@
 import express = require('express');
+import path = require('path');
 //inicializando el servidor de node
 //esta clase se importad por default
 export default class Server {
@@ -18,10 +19,18 @@ export default class Server {
 
     }
 
-    start(callback:any) {        
-    
-        this.aplicacion.listen(this.puerto, callback);
+    private publicfolder(){
+        
+        const publicpath = path.resolve(__dirname,'../public');
+        this.aplicacion.use(express.static( publicpath ));
 
+    }
+
+    start(callback:any) {        
+    //servidor escuchando.
+        this.aplicacion.listen(this.puerto, callback);
+        this.publicfolder()
+        
         
     }
 }
