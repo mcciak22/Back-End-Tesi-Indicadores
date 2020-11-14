@@ -3,6 +3,7 @@ import MySQL from '../mysql/mysql';
 
 const router = Router();
 
+//ruta para Api de Consultar todos los usuarios.
 router.get('/usuarios',(req:Request,res:Response)=>{
 
     const query =`
@@ -34,6 +35,7 @@ router.get('/usuarios',(req:Request,res:Response)=>{
     // })
 })
 
+//API para consultar los datos de usuarios por id
 router.get('/usuario/:id',(req:Request,res:Response)=>{
 
     //este es el parametro que se consulta desde la url
@@ -70,4 +72,16 @@ router.get('/usuario/:id',(req:Request,res:Response)=>{
     });
 })
 
+.post('/usuario',(req:Request,res:Response)=>{
+    const objetobody = req.body.Nombre;
+    console.log(objetobody);
+    
+    // const queryinsetar =`
+    // INSERT
+    // INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Carrera) 
+    // VALUES ('Ari Argenis', 'Rodriguez Bautista', 'ari@tesi.org', 'administrador', '123456', 'Ingenieria En Sistemas Computacionales')
+    // `
+
+    res.json({objetobody})
+})
 export default router; 
