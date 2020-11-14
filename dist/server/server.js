@@ -2,12 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var path = require("path");
+var bodyParser = require("body-parser");
 //inicializando el servidor de node
 //esta clase se importad por default
 var Server = /** @class */ (function () {
     function Server(puerto) {
         this.puerto = puerto;
         this.aplicacion = express();
+        this.aplicacion.use(bodyParser.json()); // support json encoded bodies
+        this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
     }
     //este es el metodo que se llame para inicializar una vez buena practica
     Server.init = function (puerto) {

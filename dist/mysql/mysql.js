@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql = require("mysql");
+require('dotenv').config();
 var MySQL = /** @class */ (function () {
     /**
      *
@@ -9,10 +10,10 @@ var MySQL = /** @class */ (function () {
         this.conectado = false;
         console.log('Clase inicializada');
         this.conexion = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'password',
-            database: 'tesi'
+            host: process.env.DATA_DB_HOST,
+            user: process.env.DATA_DB_USER,
+            password: process.env.DATA_DB_PASS,
+            database: process.env.DATA_DB_NAME
         });
         //this.conexion.connect();
         this.ConectarDB();

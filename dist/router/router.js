@@ -53,8 +53,8 @@ router.get('/usuario/:id', function (req, res) {
             });
         }
     });
-});
-router.post('/usuarioinsert', function (req, res) {
+})
+    .post('/usuario', function (req, res) {
     var objetobody = req.body.Nombre;
     console.log(objetobody);
     // const queryinsetar =`

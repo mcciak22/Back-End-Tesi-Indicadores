@@ -1,4 +1,5 @@
-import mysql = require('mysql')
+import mysql = require('mysql');
+require('dotenv').config();
 
 export default class MySQL {
     //esta es una nueva instancia de mysql
@@ -12,10 +13,10 @@ export default class MySQL {
     constructor() {
         console.log('Clase inicializada');
         this.conexion = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'password',
-            database: 'tesi'
+            host: process.env.DATA_DB_HOST,
+            user: process.env.DATA_DB_USER,
+            password: process.env.DATA_DB_PASS,
+            database: process.env.DATA_DB_NAME
         });
         //this.conexion.connect();
         this.ConectarDB()
