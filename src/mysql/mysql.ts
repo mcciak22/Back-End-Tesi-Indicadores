@@ -40,7 +40,7 @@ export default class MySQL {
             }
 
             if (results.length === 0) {
-                console.log('El registro solicitado no existe');               
+                callback('El registro solicitado no existe');               
             }
             else{
                 callback(null,results);
