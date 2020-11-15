@@ -47,12 +47,11 @@ export default class Server {
          * son funciones que se ejecutan antes de las**********
          * peticiones solicitadas
          ******************************************************/
-        this.aplicacion.use();
+        this.aplicacion.use(morgan('dev'));
 
          /******************************************************
-          * configuracion de parametros en el body de
-          * 
-          *  el middleware
+          * configuracion de parametros en el body
+          *  
           */
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
