@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var mysql_1 = __importDefault(require("../mysql/mysql"));
 var moment = require("moment");
+var bcrypt = require("bcrypt");
 var router = express_1.Router();
 //ruta para Api de Consultar todos los usuarios.
 router.get('/usuarios', function (req, res) {
@@ -56,12 +57,13 @@ router.get('/usuario/:id', function (req, res) {
     });
 })
     .post('/usuario', function (req, res) {
+    var pass = hashPassword(req.body.Contraseña);
     var body = {
         Nombre: req.body.Nombre,
         Apellidos: req.body.Apellidos,
         Email: req.body.Email,
         Rol: req.body.Rol,
-        Contraseña: req.body.Contraseña,
+        Contraseña: pass,
         Foto: req.body.Foto,
         Carrera: req.body.Carrera,
         Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
@@ -100,4 +102,7 @@ router.get('/usuario/:id', function (req, res) {
         }
     });
 });
+function hashPassword(passwordtxt) {
+    return bcrypt.hashSync(passwordtxt, 10);
+}
 exports.default = router;
