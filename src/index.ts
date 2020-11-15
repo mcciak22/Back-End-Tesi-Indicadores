@@ -9,7 +9,16 @@ const server = Server.init( 3000 );
 server.aplicacion.use( router )
 
 //const myqls = new MySQL();
+/*********************************
+ * Middleware de index
+ * de MYSQL Verifica la conexion.
+ */
 MySQL.instancia
+
+
+/*************************
+ *******RUTAS*************
+ * ***********************/
 
 server.start(()=>{
 
