@@ -5,7 +5,7 @@ import bcrypt = require("bcrypt");
 const router = Router();
 
 //ruta para Api de Consultar todos los usuarios.
-router.get('/usuarios', (req: Request, res: Response) => {
+router.get('./usuarios', (req: Request, res: Response) => {
 
     const query = `
     SELECT *
@@ -37,7 +37,7 @@ router.get('/usuarios', (req: Request, res: Response) => {
 })
 
 //API para consultar los datos de usuarios por id
-router.get('/usuario/:id', (req: Request, res: Response) => {
+router.get('./usuario/:id', (req: Request, res: Response) => {
 
     //este es el parametro que se consulta desde la url
     const id = req.params.id
@@ -72,7 +72,7 @@ router.get('/usuario/:id', (req: Request, res: Response) => {
 
     });
 })
-    .post('/usuario', (req: Request, res: Response) => {
+    .post('./usuario', (req: Request, res: Response) => {
         let pass = hashPassword(req.body.Contraseña)
         const body =
         {
@@ -110,7 +110,7 @@ router.get('/usuario/:id', (req: Request, res: Response) => {
             }
         });
     })
-    .delete('./usuario?id=:id', (req: Request, res: Response) => {
+    .delete('./usuario/:id', (req: Request, res: Response) => {
         const id = req.params.id.valueOf()
         console.log(id);
         
