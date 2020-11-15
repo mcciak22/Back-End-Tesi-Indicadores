@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import MySQL from '../mysql/mysql';
 import moment = require('moment');
-
+import bcrypt = require("bcrypt");
 const router = Router();
 
 //ruta para Api de Consultar todos los usuarios.
