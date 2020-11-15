@@ -1,6 +1,6 @@
 import express = require('express');
+import morgan =  require('morgan');
 import path = require('path');
-
 import bodyParser = require('body-parser');
 
 //inicializando el servidor de node
@@ -13,6 +13,7 @@ export default class Server {
     public aplicacion: express.Application;
     public puerto: number;
 
+
     constructor(
         /********************************************
          * puerto al momento de instanciar la clase servidor 
@@ -21,6 +22,7 @@ export default class Server {
          ********************************************/
         puerto: number
     ) {
+
         /********************************************************
          * Configuracion del la aplicacion del servidor con el cual 
          * el contructor se inicia primero para el server.
@@ -39,6 +41,19 @@ export default class Server {
         this.aplicacion.set('view engine','ejs')
         this.aplicacion.set('views',path.join(__dirname,'views'))
 
+        /******************************************************
+         * Configurando el middleware**************************
+         * Que es el middleware********************************
+         * son funciones que se ejecutan antes de las**********
+         * peticiones solicitadas
+         ******************************************************/
+        this.aplicacion.use();
+
+         /******************************************************
+          * configuracion de parametros en el body de
+          * 
+          *  el middleware
+          */
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
