@@ -9,7 +9,7 @@ var moment = require("moment");
 var bcrypt = require("bcrypt");
 var router = express_1.Router();
 //ruta para Api de Consultar todos los usuarios.
-router.get('/usuarios', function (req, res) {
+router.get('./usuarios', function (req, res) {
     var query = "\n    SELECT *\n    FROM usuarios";
     mysql_1.default.EjecutarQuery(query, function (error, usuarios) {
         if (error) {
@@ -31,7 +31,7 @@ router.get('/usuarios', function (req, res) {
     // })
 });
 //API para consultar los datos de usuarios por id
-router.get('/usuario/:id', function (req, res) {
+router.get('./usuario/:id', function (req, res) {
     //este es el parametro que se consulta desde la url
     var id = req.params.id;
     var escaparcaracteres = mysql_1.default.instancia.conexion.escape(id);
@@ -56,7 +56,7 @@ router.get('/usuario/:id', function (req, res) {
         }
     });
 })
-    .post('/usuario', function (req, res) {
+    .post('./usuario', function (req, res) {
     var pass = hashPassword(req.body.Contraseña);
     var body = {
         Nombre: req.body.Nombre,
@@ -84,7 +84,7 @@ router.get('/usuario/:id', function (req, res) {
         }
     });
 })
-    .delete('./usuario?id=:id', function (req, res) {
+    .delete('./usuario/:id', function (req, res) {
     var id = req.params.id.valueOf();
     console.log(id);
     var queryeliminar = "\n        DELETE \n        FROM   tesi.usuarios \n        WHERE (id_usuario = " + id + ");\n        ";
@@ -101,6 +101,10 @@ router.get('/usuario/:id', function (req, res) {
             });
         }
     });
+});
+router.post('/login', function (req, res) {
+    var username = req.body.Username;
+    var password = req.body.Password;
 });
 function hashPassword(passwordtxt) {
     return bcrypt.hashSync(passwordtxt, 10);
