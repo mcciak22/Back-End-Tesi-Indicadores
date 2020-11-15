@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var mysql_1 = __importDefault(require("../mysql/mysql"));
+var moment = require("moment");
 var router = express_1.Router();
 //ruta para Api de Consultar todos los usuarios.
 router.get('/usuarios', function (req, res) {
@@ -55,13 +56,48 @@ router.get('/usuario/:id', function (req, res) {
     });
 })
     .post('/usuario', function (req, res) {
-    var objetobody = req.body.Nombre;
-    console.log(objetobody);
-    // const queryinsetar =`
-    // INSERT
-    // INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Carrera) 
-    // VALUES ('Ari Argenis', 'Rodriguez Bautista', 'ari@tesi.org', 'administrador', '123456', 'Ingenieria En Sistemas Computacionales')
-    // `
-    res.json({ objetobody: objetobody });
+    var body = {
+        Nombre: req.body.Nombre,
+        Apellidos: req.body.Apellidos,
+        Email: req.body.Email,
+        Rol: req.body.Rol,
+        Contraseña: req.body.Contraseña,
+        Foto: req.body.Foto,
+        Carrera: req.body.Carrera,
+        Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        Fecha_de_Actualizacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+    };
+    var queryinsetar = "INSERT INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contrase\u00F1a, Foto, Carrera, Fecha_de_Creacion, Fecha_de_Actualizacion) VALUES ('" + body.Nombre + "','" + body.Apellidos + "','" + body.Email + "','" + body.Rol + "','" + body.Contraseña + "','" + body.Foto + "','" + body.Carrera + "','" + body.Fecha_de_Creacion + "','" + body.Fecha_de_Actualizacion + "')";
+    mysql_1.default.EjecutarQuery(queryinsetar, function (error, usuario) {
+        if (error) {
+            res.status(400).json({
+                ok: false,
+                errorms: error
+            });
+        }
+        else {
+            res.status(200).json({
+                ok: true
+            });
+        }
+    });
+})
+    .delete('./usuario?id=:id', function (req, res) {
+    var id = req.params.id.valueOf();
+    console.log(id);
+    var queryeliminar = "\n        DELETE \n        FROM   tesi.usuarios \n        WHERE (id_usuario = " + id + ");\n        ";
+    mysql_1.default.EjecutarQuery(queryeliminar, function (error, usuario) {
+        if (error) {
+            res.status(400).json({
+                ok: false,
+                errorms: error
+            });
+        }
+        else {
+            res.status(200).json({
+                ok: true
+            });
+        }
+    });
 });
 exports.default = router;

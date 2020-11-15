@@ -1,29 +1,30 @@
-import {Router, Request , Response} from 'express';
+import { Router, Request, Response } from 'express';
 import MySQL from '../mysql/mysql';
+import moment = require('moment');
 
 const router = Router();
 
 //ruta para Api de Consultar todos los usuarios.
-router.get('/usuarios',(req:Request,res:Response)=>{
+router.get('/usuarios', (req: Request, res: Response) => {
 
-    const query =`
+    const query = `
     SELECT *
     FROM usuarios`;
 
-    MySQL.EjecutarQuery(query, (error:any, usuarios:Object[] )=>{
+    MySQL.EjecutarQuery(query, (error: any, usuarios: Object[]) => {
 
-        if(error){
+        if (error) {
 
             res.status(400).json({
                 ok: false,
-                errorms:error
-                                
+                errorms: error
+
             });
 
-        }else{
+        } else {
             res.json({
-                ok:true,
-                usuarios:usuarios
+                ok: true,
+                usuarios: usuarios
             })
         }
 
@@ -36,7 +37,7 @@ router.get('/usuarios',(req:Request,res:Response)=>{
 })
 
 //API para consultar los datos de usuarios por id
-router.get('/usuario/:id',(req:Request,res:Response)=>{
+router.get('/usuario/:id', (req: Request, res: Response) => {
 
     //este es el parametro que se consulta desde la url
     const id = req.params.id
@@ -47,41 +48,92 @@ router.get('/usuario/:id',(req:Request,res:Response)=>{
     //     id: id
     // })
 
-    const query =`
+    const query = `
     SELECT *
     FROM usuarios
     WHERE id_usuario = ${escaparcaracteres}`;
 
-    MySQL.EjecutarQuery(query, (error:any, usuario:Object[] )=>{
+    MySQL.EjecutarQuery(query, (error: any, usuario: Object[]) => {
 
-        if(error){
+        if (error) {
 
             res.status(400).json({
                 ok: false,
-                errorms:error
-                                
+                errorms: error
+
             });
 
-        }else{
+        } else {
             res.json({
-                ok:true,
+                ok: true,
                 usuario: usuario[0]
             })
         }
 
     });
 })
+    .post('/usuario', (req: Request, res: Response) => {
+        const body =
+        {
+            Nombre: req.body.Nombre,
+            Apellidos: req.body.Apellidos,
+            Email: req.body.Email,
+            Rol: req.body.Rol,
+            Contraseña: req.body.Contraseña,
+            Foto: req.body.Foto,
+            Carrera: req.body.Carrera,
+            Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+            Fecha_de_Actualizacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
 
-.post('/usuario',(req:Request,res:Response)=>{
-    const objetobody = req.body.Nombre;
-    console.log(objetobody);
+
+        };
+        
+
+        const queryinsetar =
+        `INSERT INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Foto, Carrera, Fecha_de_Creacion, Fecha_de_Actualizacion) VALUES ('${body.Nombre}','${body.Apellidos}','${body.Email}','${body.Rol}','${body.Contraseña}','${body.Foto}','${body.Carrera}','${body.Fecha_de_Creacion}','${body.Fecha_de_Actualizacion}')`;
+
+        MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: Object) => {
+
+            if (error) {
+
+                res.status(400).json({
+                    ok: false,
+                    errorms: error
     
-    // const queryinsetar =`
-    // INSERT
-    // INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Carrera) 
-    // VALUES ('Ari Argenis', 'Rodriguez Bautista', 'ari@tesi.org', 'administrador', '123456', 'Ingenieria En Sistemas Computacionales')
-    // `
+                });
+    
+            } else {
+                res.status(200).json({
+                    ok: true                    
+                })
+            }
+        });
+    })
+    .delete('./usuario?id=:id', (req: Request, res: Response) => {
+        const id = req.params.id.valueOf()
+        console.log(id);
+        
+        const queryeliminar= `
+        DELETE 
+        FROM   tesi.usuarios 
+        WHERE (id_usuario = ${id});
+        `;
+        MySQL.EjecutarQuery(queryeliminar, (error: any, usuario: Object) => {
 
-    res.json({objetobody})
-})
+            if (error) {
+
+                res.status(400).json({
+                    ok: false,
+                    errorms: error
+    
+                });
+    
+            } else {
+                res.status(200).json({
+                    ok: true                    
+                })
+            }
+        });
+
+    });
 export default router; 

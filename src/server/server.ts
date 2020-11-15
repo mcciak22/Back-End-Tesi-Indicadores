@@ -6,11 +6,19 @@ import bodyParser = require('body-parser');
 //inicializando el servidor de node
 //esta clase se importad por default
 export default class Server {
-
+    /********************************************************
+     * Propiedades de la clase Server con la cual en el index.ts
+     * ejecuta el servidor con la funcion init.
+     ********************************************************/
     public aplicacion: express.Application;
     public puerto: number;
 
     constructor(
+        /********************************************
+         * puerto al momento de instanciar la clase servidor 
+         * requiere como el numero del puerto donde iniciara
+         *  el servidor
+         ********************************************/
         puerto: number
     ) {
         this.puerto = puerto;
