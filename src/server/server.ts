@@ -35,7 +35,9 @@ export default class Server {
          ****************************************/
         //Puerto del servidor
         this.aplicacion.set('port', process.env.PORT || 3000 )
-        this.aplicacion.set
+        //Motor de plantillas
+        this.aplicacion.set('view engine','ejs')
+        this.aplicacion.set('views',path.join(__dirname,'views'))
 
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
