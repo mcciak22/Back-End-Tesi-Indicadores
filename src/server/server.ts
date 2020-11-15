@@ -21,8 +21,22 @@ export default class Server {
          ********************************************/
         puerto: number
     ) {
+        /********************************************************
+         * Configuracion del la aplicacion del servidor con el cual 
+         * el contructor se inicia primero para el server.
+         */
         this.puerto = puerto;
+        /**********************************************
+         * Inicializar el valor del servidor de expess*
+         **********************************************/
         this.aplicacion = express();
+        /****************************************
+         ******Configuracion del servidor********
+         ****************************************/
+        //Puerto del servidor
+        this.aplicacion.set('port', process.env.PORT || 3000 )
+        this.aplicacion.set
+
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -30,7 +44,6 @@ export default class Server {
     //este es el metodo que se llame para inicializar una vez buena practica
     static init(puerto: number) {
         return new Server(puerto);
-
     }
 
     private publicfolder() {

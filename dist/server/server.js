@@ -6,7 +6,13 @@ var bodyParser = require("body-parser");
 //inicializando el servidor de node
 //esta clase se importad por default
 var Server = /** @class */ (function () {
-    function Server(puerto) {
+    function Server(
+    /********************************************
+     * puerto al momento de instanciar la clase servidor
+     * requiere como el numero del puerto donde iniciara
+     *  el servidor
+     ********************************************/
+    puerto) {
         this.puerto = puerto;
         this.aplicacion = express();
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
