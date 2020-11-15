@@ -73,13 +73,14 @@ router.get('/usuario/:id', (req: Request, res: Response) => {
     });
 })
     .post('/usuario', (req: Request, res: Response) => {
+        let pass = hashPassword(req.body.Contraseña)
         const body =
         {
             Nombre: req.body.Nombre,
             Apellidos: req.body.Apellidos,
             Email: req.body.Email,
             Rol: req.body.Rol,
-            Contraseña: req.body.Contraseña,
+            Contraseña: pass,
             Foto: req.body.Foto,
             Carrera: req.body.Carrera,
             Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
@@ -136,4 +137,9 @@ router.get('/usuario/:id', (req: Request, res: Response) => {
         });
 
     });
+
+    function hashPassword (passwordtxt: string) {
+        return bcrypt.hashSync(passwordtxt, 10)
+      }
+    
 export default router; 
