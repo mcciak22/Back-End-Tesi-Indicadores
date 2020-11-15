@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS `maestros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `maestros` (
-  `id_maestros` int(11) NOT NULL,
+  `id_maestro` int(11) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
   `Apellidos` varchar(45) NOT NULL,
   `Email` varchar(45) NOT NULL,
@@ -70,8 +70,8 @@ CREATE TABLE `maestros` (
   `Foto` text,
   `Matricula` varchar(45) NOT NULL,
   `Turno` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_maestros`),
-  UNIQUE KEY `idmaestros_UNIQUE` (`id_maestros`),
+  PRIMARY KEY (`id_maestro`),
+  UNIQUE KEY `idmaestros_UNIQUE` (`id_maestro`),
   UNIQUE KEY `Email_UNIQUE` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -93,20 +93,20 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
   `Apellidos` varchar(45) NOT NULL,
   `Email` varchar(25) NOT NULL,
   `Rol` varchar(30) NOT NULL,
-  `Contraseña` varchar(45) NOT NULL,
+  `Contraseña` varchar(255) NOT NULL,
   `Foto` text,
   `Carrera` varchar(45) NOT NULL,
-  `Fecha de Creacion` timestamp NOT NULL,
-  `Fecha de Actualizacion` timestamp NOT NULL,
+  `Fecha_de_Creacion` text NOT NULL,
+  `Fecha_de_Actualizacion` text NOT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `idusuarios_UNIQUE` (`id_usuario`),
   UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Mario Alberto','Rodriguez Roldan','mario@tesi.org','administrador','123456',NULL,'Ingenieria En Sistemas Computacionesles','2020-11-13 19:36:52','2020-11-13 19:36:52');
+INSERT INTO `usuarios` VALUES (1,'Mario Alberto','Rodriguez Roldan','mario@tesi.org','administrador','123456',NULL,'Ingenieria En Sistemas Computacionales','2020-11-13 13:36:52','2020-11-13 13:36:52'),(2,'sdasdasd','asdasdasd','asdasdasd','adasasdas','asdasdasd','asdasdas','asdadasdasd','2020-11-13 13:36:52','2020-11-13 13:36:52'),(3,'sdasdasd','asdasdasd','uriedasjkasjdas','adasasdas','asdasdasd','asdasdas','asdadasdasd','2020-11-13 13:36:52','2020-11-13 13:36:52'),(6,'James Alfredo','Rodriguez Bautista','james@tesi.org','Administador','$2b$10$S1iA55R72e.cUflBosSHz.xZ9OxYAMB6gI9EjOHX.TWAF9jD09m7u','null','Ingenieria En Sistemas Computacionales','2020-11-14 22:01:50','2020-11-14 22:01:50');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-13 20:46:57
+-- Dump completed on 2020-11-15 12:18:50

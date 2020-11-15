@@ -137,6 +137,11 @@ router.get('./usuario/:id', (req: Request, res: Response) => {
         });
 
     });
+    router.post('/login',(req: Request, res: Response)=>{
+        const username = req.body.Username;
+        const password = req.body.Password
+
+    })
 
     function hashPassword (passwordtxt: string) {
         return bcrypt.hashSync(passwordtxt, 10)
