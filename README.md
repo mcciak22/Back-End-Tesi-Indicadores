@@ -22,7 +22,7 @@ para iniciar el servidor de la api.
 
 ## APIS
 
-GET `api/usuarios` trae la lista de usuarios.
-GET `api/usuario/(id)` trae al usurio especifico por id de usuario
-DELETE `api/usuario/(id)` elimina al usuario especifico por id de usuario
-POST `api/usuario` inserta un registro de usuario nuevo.
+-GET `api/usuarios` trae la lista de usuarios.
+-GET `api/usuario/(id)` trae al usurio especifico por id de usuario
+-DELETE `api/usuario/(id)` elimina al usuario especifico por id de usuario
+-POST `api/usuario` inserta un registro de usuario nuevo.
