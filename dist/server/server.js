@@ -4,6 +4,7 @@ var express = require("express");
 var morgan = require("morgan");
 var path = require("path");
 var bodyParser = require("body-parser");
+var cors = require("cors");
 //inicializando el servidor de node
 //esta clase se importad por default
 var Server = /** @class */ (function () {
@@ -42,6 +43,7 @@ var Server = /** @class */ (function () {
          * configuracion de parametros en el body
          *
          */
+        this.aplicacion.use(cors());
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
     }

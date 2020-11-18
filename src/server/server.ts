@@ -2,6 +2,7 @@ import express = require('express');
 import morgan =  require('morgan');
 import path = require('path');
 import bodyParser = require('body-parser');
+import cors = require('cors');
 
 //inicializando el servidor de node
 //esta clase se importad por default
@@ -48,11 +49,11 @@ export default class Server {
          * peticiones solicitadas
          ******************************************************/
         this.aplicacion.use(morgan('dev'));
-
          /******************************************************
           * configuracion de parametros en el body
           *  
           */
+        this.aplicacion.use(cors())
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
