@@ -13,7 +13,7 @@ export default class Usuarios{
     }
 
     public static AllUsuarios(req:Request, res:Response){
-        const query = `
+    const query = `
     SELECT *
     FROM usuarios`;
 

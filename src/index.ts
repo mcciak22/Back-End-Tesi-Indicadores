@@ -1,6 +1,6 @@
 import Server from './server/server';
 import MySQL from './mysql/mysql';
-const routes = require('./routes/indexRoutes')
+const routes = require('./router/usuarioRoute')
 /*********************************
 ********Servidor inicializado*****
  *********************************/
@@ -18,7 +18,7 @@ MySQL.instancia
 /*************************
  *******RUTAS*************
  *************************/
-//nprequire('./router/router')(server.aplicacion)
+//require('./router/router')(server.aplicacion)
 
 
 

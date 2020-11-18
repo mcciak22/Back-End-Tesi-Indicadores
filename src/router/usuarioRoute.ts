@@ -1,0 +1,167 @@
+// import { Router, Request, Response } from 'express';
+// import MySQL from '../mysql/mysql';
+// import moment = require('moment');
+// import bcrypt = require("bcrypt");
+// const router = Router();
+
+// //ruta para Api de Consultar todos los usuarios.
+// router.get('./usuarios', (req: Request, res: Response) => {
+
+//     const query = `
+//     SELECT *
+//     FROM usuarios`;
+
+//     MySQL.EjecutarQuery(query, (error: any, usuarios: Object[]) => {
+
+//         if (error) {
+
+//             res.status(400).json({
+//                 ok: false,
+//                 errorms: error
+
+//             });
+
+//         } else {
+//             res.json({
+//                 ok: true,
+//                 usuarios: usuarios
+//             })
+//         }
+
+//     });
+
+//     // res.json({
+//     //     ok:true,
+//     //     mensaje:'todo esta bien api'
+//     // })
+// })
+
+// //API para consultar los datos de usuarios por id
+// router.get('./usuario/:id', (req: Request, res: Response) => {
+
+//     //este es el parametro que se consulta desde la url
+//     const id = req.params.id
+//     const escaparcaracteres = MySQL.instancia.conexion.escape(id)
+//     // res.json({
+//     //     ok:true,
+//     //     mensaje:'todo esta bien api',
+//     //     id: id
+//     // })
+
+//     const query = `
+//     SELECT *
+//     FROM usuarios
+//     WHERE id_usuario = ${escaparcaracteres}`;
+
+//     MySQL.EjecutarQuery(query, (error: any, usuario: Object[]) => {
+
+//         if (error) {
+
+//             res.status(400).json({
+//                 ok: false,
+//                 errorms: error
+
+//             });
+
+//         } else {
+//             res.json({
+//                 ok: true,
+//                 usuario: usuario[0]
+//             })
+//         }
+
+//     });
+// })
+//     .post('./usuario', (req: Request, res: Response) => {
+//         let pass = hashPassword(req.body.Contraseña)
+//         const body =
+//         {
+//             Nombre: req.body.Nombre,
+//             Apellidos: req.body.Apellidos,
+//             Email: req.body.Email,
+//             Rol: req.body.Rol,
+//             Contraseña: pass,
+//             Foto: req.body.Foto,
+//             Carrera: req.body.Carrera,
+//             Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+//             Fecha_de_Actualizacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+
+
+//         };
+        
+
+//         const queryinsetar =
+//         `INSERT INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Foto, Carrera, Fecha_de_Creacion, Fecha_de_Actualizacion) VALUES ('${body.Nombre}','${body.Apellidos}','${body.Email}','${body.Rol}','${body.Contraseña}','${body.Foto}','${body.Carrera}','${body.Fecha_de_Creacion}','${body.Fecha_de_Actualizacion}')`;
+
+//         MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: Object) => {
+
+//             if (error) {
+
+//                 res.status(400).json({
+//                     ok: false,
+//                     errorms: error
+    
+//                 });
+    
+//             } else {
+//                 res.status(200).json({
+//                     ok: true                    
+//                 })
+//             }
+//         });
+//     })
+//     .delete('./usuario/:id', (req: Request, res: Response) => {
+//         const id = req.params.id.valueOf()
+//         console.log(id);
+        
+//         const queryeliminar= `
+//         DELETE 
+//         FROM   tesi.usuarios 
+//         WHERE (id_usuario = ${id});
+//         `;
+//         MySQL.EjecutarQuery(queryeliminar, (error: any, usuario: Object) => {
+
+//             if (error) {
+
+//                 res.status(400).json({
+//                     ok: false,
+//                     errorms: error
+    
+//                 });
+    
+//             } else {
+//                 res.status(200).json({
+//                     ok: true                    
+//                 })
+//             }
+//         });
+
+//     });
+//     router.post('/login',(req: Request, res: Response)=>{
+//         const username = req.body.Username;
+//         const password = req.body.Password
+
+//     })
+
+//     function hashPassword (passwordtxt: string) {
+//         return bcrypt.hashSync(passwordtxt, 10)
+//       }
+    
+// export default router; 
+
+import { Router } from 'express';
+import usuariocontroller from '../controllers/usuariosController';
+const router = Router();
+const Modulo = 'usuarios'
+
+/**********************
+ * URLs DEL SERVIDOR QUe VA A MANEJAR.
+ */
+router.get(`/api/${Modulo}`,usuariocontroller.AllUsuarios)
+router.get(`/api/${Modulo}/:id`,usuariocontroller.OneUsuario)
+router.post(`/api/${Modulo}`,usuariocontroller.insertarUsuario)
+router.delete(`/api/${Modulo}/:id`,usuariocontroller.eliminarUsuario)
+
+//require('./setupdbRoutes')(app)
+
+module.exports = router;

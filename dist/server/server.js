@@ -24,6 +24,9 @@ var Server = /** @class */ (function () {
          * Inicializar el valor del servidor de expess*
          **********************************************/
         this.aplicacion = express();
+        // var app = require('../routes/indexRoutes')(this.aplicacion);
+        //var app2 = app(this.aplicacion);
+        //console.log(app);
         /****************************************
          ******Configuracion del servidor********
          ****************************************/
@@ -43,6 +46,7 @@ var Server = /** @class */ (function () {
          * configuracion de parametros en el body
          *
          */
+        // this.aplicacion.use(routes(this.aplicacion))
         this.aplicacion.use(cors());
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var server_1 = __importDefault(require("./server/server"));
 var mysql_1 = __importDefault(require("./mysql/mysql"));
-var routes = require('./routes/indexRoutes');
+var routes = require('./router/usuarioRoute');
 /*********************************
 ********Servidor inicializado*****
  *********************************/
@@ -20,7 +20,7 @@ mysql_1.default.instancia;
 /*************************
  *******RUTAS*************
  *************************/
-//nprequire('./router/router')(server.aplicacion)
+//require('./router/router')(server.aplicacion)
 server.start(function () {
     console.log('Server Iniciado');
 });
