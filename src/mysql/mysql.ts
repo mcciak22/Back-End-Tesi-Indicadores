@@ -12,7 +12,7 @@ export default class MySQL {
      */
     constructor() {
         
-        console.log('Clase inicializada');
+        //console.log('Clase inicializada MYSQL');
         this.conexion = mysql.createConnection({
             host: process.env.DATA_DB_HOST,
             user: process.env.DATA_DB_USER,
