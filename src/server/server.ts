@@ -1,5 +1,6 @@
 import express = require('express');
 import morgan = require('morgan');
+//import chalk = require('chalk');
 import path = require('path');
 import bodyParser = require('body-parser');
 import cors = require('cors');
@@ -55,7 +56,8 @@ export default class Server {
          * son funciones que se ejecutan antes de las**********
          * peticiones solicitadas
          ******************************************************/
-        this.aplicacion.use(morgan('dev'));
+        //this.aplicacion.use(morgan('dev'));
+        //this.aplicacion.use(chalk);
         /******************************************************
          * configuracion de parametros en el body
          *  

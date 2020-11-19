@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var morgan = require("morgan");
+//import chalk = require('chalk');
 var path = require("path");
 var bodyParser = require("body-parser");
 var cors = require("cors");
@@ -42,6 +43,7 @@ var Server = /** @class */ (function () {
          * peticiones solicitadas
          ******************************************************/
         this.aplicacion.use(morgan('dev'));
+        //this.aplicacion.use(chalk);
         /******************************************************
          * configuracion de parametros en el body
          *
