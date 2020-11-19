@@ -50,6 +50,8 @@ var Server = /** @class */ (function () {
         this.aplicacion.use(cors());
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+        /*****************CONFIGURACION GLOBAL DE RUTAS*************************************/
+        this.aplicacion.use(require('../router/indexRouter'));
     }
     //este es el metodo que se llame para inicializar una vez buena practica
     Server.init = function (puerto) {

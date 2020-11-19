@@ -1,79 +1,79 @@
-import {Request, Response } from 'express';
+import { Request, Response } from 'express';
 import MySQL from '../mysql/mysql';
 import moment = require('moment');
 import bcrypt = require("bcrypt");
 /******************los modulos ya no se exportan se crean como instancias de clases.******************/
-export default class Usuarios{
+export default class Usuarios {
     /**
      *
      */
     constructor() {
-        
-        
+
+
     }
 
-    public static AllUsuarios(req:Request, res:Response){
-    const query = `
+    public static AllUsuarios(req: Request, res: Response) {
+        const query = `
     SELECT *
     FROM usuarios`;
 
-    MySQL.EjecutarQuery(query, (error: any, usuarios: Object[]) => {
+        MySQL.EjecutarQuery(query, (error: any, usuarios: Object[]) => {
 
-        if (error) {
+            if (error) {
 
-            res.status(400).json({
-                ok: false,
-                errorms: error
+                res.status(400).json({
+                    ok: false,
+                    errorms: error
 
-            });
+                });
 
-        } else {
-            res.json({
-                ok: true,
-                usuarios: usuarios
-            })
-        }
+            } else {
+                res.json({
+                    ok: true,
+                    usuarios: usuarios
+                })
+            }
 
-    });
+        });
 
     }
 
-    public static OneUsuario(req:Request,res:Response){
-          //este es el parametro que se consulta desde la url
-    const id = req.params.id
-    const escaparcaracteres = MySQL.instancia.conexion.escape(id)
-    // res.json({
-    //     ok:true,
-    //     mensaje:'todo esta bien api',
-    //     id: id
-    // })
+    public static OneUsuario(req: Request, res: Response) {
+        //este es el parametro que se consulta desde la url
+        const id = req.params.id
+        const escaparcaracteres = MySQL.instancia.conexion.escape(id)
+        // res.json({
+        //     ok:true,
+        //     mensaje:'todo esta bien api',
+        //     id: id
+        // })
 
-    const query = `
+        const query = `
     SELECT *
     FROM usuarios
     WHERE id_usuario = ${escaparcaracteres}`;
 
-    MySQL.EjecutarQuery(query, (error: any, usuario: Object[]) => {
+        MySQL.EjecutarQuery(query, (error: any, usuario: Object[]) => {
 
-        if (error) {
+            if (error) {
 
-            res.status(400).json({
-                ok: false,
-                errorms: error
+                res.status(400).json({
+                    ok: false,
+                    errorms: error
 
-            });
+                });
 
-        } else {
-            res.json({
-                ok: true,
-                usuario: usuario[0]
-            })
-        }
+            } else {
+                res.json({
+                    ok: true,
+                    usuario: usuario[0]
+                })
+            }
 
-    });
+        });
     }
 
-    public static insertarUsuario(req:Request, res:Response){
+    public static insertarUsuario(req: Request, res: Response) {
         let pass = this.hashPassword(req.body.Contraseña)
         const body =
         {
@@ -89,10 +89,10 @@ export default class Usuarios{
 
 
         };
-        
+
 
         const queryinsetar =
-        `INSERT INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Foto, Carrera, Fecha_de_Creacion, Fecha_de_Actualizacion) VALUES ('${body.Nombre}','${body.Apellidos}','${body.Email}','${body.Rol}','${body.Contraseña}','${body.Foto}','${body.Carrera}','${body.Fecha_de_Creacion}','${body.Fecha_de_Actualizacion}')`;
+            `INSERT INTO tesi.usuarios (Nombre, Apellidos, Email, Rol, Contraseña, Foto, Carrera, Fecha_de_Creacion, Fecha_de_Actualizacion) VALUES ('${body.Nombre}','${body.Apellidos}','${body.Email}','${body.Rol}','${body.Contraseña}','${body.Foto}','${body.Carrera}','${body.Fecha_de_Creacion}','${body.Fecha_de_Actualizacion}')`;
 
         MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: Object) => {
 
@@ -101,22 +101,22 @@ export default class Usuarios{
                 res.status(400).json({
                     ok: false,
                     errorms: error
-    
+
                 });
-    
+
             } else {
                 res.status(200).json({
-                    ok: true                    
+                    ok: true
                 })
             }
         });
     }
 
-    public static eliminarUsuario(req: Request, res: Response){
+    public static eliminarUsuario(req: Request, res: Response) {
         const id = req.params.id.valueOf()
         console.log(id);
-        
-        const queryeliminar= `
+
+        const queryeliminar = `
         DELETE 
         FROM   tesi.usuarios 
         WHERE (id_usuario = ${id});
@@ -128,12 +128,12 @@ export default class Usuarios{
                 res.status(400).json({
                     ok: false,
                     errorms: error
-    
+
                 });
-    
+
             } else {
                 res.status(200).json({
-                    ok: true                    
+                    ok: true
                 })
             }
         });
@@ -142,6 +142,15 @@ export default class Usuarios{
 
     private static hashPassword(passwordtxt: string) {
         return bcrypt.hashSync(passwordtxt, 10)
-      }
+    }
+
+    public static Auth(req: Request, res: Response){
+        const body = {
+            Username: req.body.Username,
+            //Password: bcrypt.compareSync(req.body.password, existingItem.password)
+
+        }
+
+    }
 }
 

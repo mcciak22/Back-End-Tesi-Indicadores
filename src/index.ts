@@ -1,11 +1,10 @@
 import Server from './server/server';
 import MySQL from './mysql/mysql';
-const routes = require('./router/usuarioRoute')
+//const usuariosrutas = require('./router/usuarioRoute')
 /*********************************
 ********Servidor inicializado*****
  *********************************/
 const server = Server.init( 3000 );
-server.aplicacion.use( routes )
 
 //const myqls = new MySQL();
 /*********************************
@@ -18,7 +17,8 @@ MySQL.instancia
 /*************************
  *******RUTAS*************
  *************************/
-//require('./router/router')(server.aplicacion)
+//require('./router/router')
+//server.aplicacion.use( usuariosrutas )
 
 
 

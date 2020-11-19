@@ -1,5 +1,5 @@
 import express = require('express');
-import morgan =  require('morgan');
+import morgan = require('morgan');
 import path = require('path');
 import bodyParser = require('body-parser');
 import cors = require('cors');
@@ -23,9 +23,9 @@ export default class Server {
          ********************************************/
         puerto: number
     ) {
-       
 
-       
+
+
 
         /********************************************************
          * Configuracion del la aplicacion del servidor con el cual 
@@ -39,15 +39,15 @@ export default class Server {
         // var app = require('../routes/indexRoutes')(this.aplicacion);
         //var app2 = app(this.aplicacion);
         //console.log(app);
-        
+
         /****************************************
          ******Configuracion del servidor********
          ****************************************/
         //Puerto del servidor
-        this.aplicacion.set('port', process.env.PORT || 3000 )
+        this.aplicacion.set('port', process.env.PORT || 3000)
         //Motor de plantillas
-        this.aplicacion.set('view engine','ejs')
-        this.aplicacion.set('views',path.join(__dirname,'views'))
+        this.aplicacion.set('view engine', 'ejs')
+        this.aplicacion.set('views', path.join(__dirname, 'views'))
 
         /******************************************************
          * Configurando el middleware**************************
@@ -56,15 +56,16 @@ export default class Server {
          * peticiones solicitadas
          ******************************************************/
         this.aplicacion.use(morgan('dev'));
-         /******************************************************
-          * configuracion de parametros en el body
-          *  
-          */
-       // this.aplicacion.use(routes(this.aplicacion))
-        this.aplicacion.use(cors())
+        /******************************************************
+         * configuracion de parametros en el body
+         *  
+         */
+        // this.aplicacion.use(routes(this.aplicacion))
+        this.aplicacion.use(cors());
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
+        /*****************CONFIGURACION GLOBAL DE RUTAS*************************************/
+        this.aplicacion.use(require('../router/indexRouter'));
     }
     //este es el metodo que se llame para inicializar una vez buena practica
     static init(puerto: number) {
