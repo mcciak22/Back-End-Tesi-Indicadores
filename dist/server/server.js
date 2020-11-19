@@ -1,15 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express = require("express");
-var morgan = require("morgan");
+const express = require("express");
 //import chalk = require('chalk');
-var path = require("path");
-var bodyParser = require("body-parser");
-var cors = require("cors");
+const path = require("path");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 //inicializando el servidor de node
 //esta clase se importad por default
-var Server = /** @class */ (function () {
-    function Server(
+class Server {
+    constructor(
     /********************************************
      * puerto al momento de instanciar la clase servidor
      * requiere como el numero del puerto donde iniciara
@@ -42,7 +41,7 @@ var Server = /** @class */ (function () {
          * son funciones que se ejecutan antes de las**********
          * peticiones solicitadas
          ******************************************************/
-        this.aplicacion.use(morgan('dev'));
+        //this.aplicacion.use(morgan('dev'));
         //this.aplicacion.use(chalk);
         /******************************************************
          * configuracion de parametros en el body
@@ -56,18 +55,17 @@ var Server = /** @class */ (function () {
         this.aplicacion.use(require('../router/indexRouter'));
     }
     //este es el metodo que se llame para inicializar una vez buena practica
-    Server.init = function (puerto) {
+    static init(puerto) {
         return new Server(puerto);
-    };
-    Server.prototype.publicfolder = function () {
-        var publicpath = path.resolve(__dirname, '../public');
+    }
+    publicfolder() {
+        const publicpath = path.resolve(__dirname, '../public');
         this.aplicacion.use(express.static(publicpath));
-    };
-    Server.prototype.start = function (callback) {
+    }
+    start(callback) {
         //servidor escuchando.
         this.aplicacion.listen(this.puerto, callback);
         this.publicfolder();
-    };
-    return Server;
-}());
+    }
+}
 exports.default = Server;
