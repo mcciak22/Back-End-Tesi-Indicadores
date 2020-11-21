@@ -45,7 +45,7 @@ export default class Server {
          ******Configuracion del servidor********
          ****************************************/
         //Puerto del servidor
-        this.aplicacion.set('port', process.env.PORT || 3000)
+        this.aplicacion.set('port', process.env.APP_PORT || 3000)
         //Motor de plantillas
         this.aplicacion.set('view engine', 'ejs')
         this.aplicacion.set('views', path.join(__dirname, 'views'))

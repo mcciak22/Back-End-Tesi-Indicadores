@@ -113,8 +113,8 @@ export default class Usuarios {
     }
 
     public static eliminarUsuario(req: Request, res: Response) {
-        const id = req.params.id.valueOf()
-        console.log(id);
+        const id = req.params.id
+        //console.log(id);
 
         const queryeliminar = `
         DELETE 
