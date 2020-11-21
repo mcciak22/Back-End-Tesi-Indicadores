@@ -144,13 +144,13 @@ export default class Usuarios {
         return bcrypt.hashSync(passwordtxt, 10)
     }
 
-    public static Auth(req: Request, res: Response){
-        const body = {
-            Username: req.body.Username,
-            //Password: bcrypt.compareSync(req.body.password, existingItem.password)
+    // public static Auth(req: Request, res: Response){
+    //     const body = {
+    //         Username: req.body.Username,
+    //         //Password: bcrypt.compareSync(req.body.password, existingItem.password)
 
-        }
+    //     }
 
-    }
+    // }
 }
 

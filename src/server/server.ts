@@ -56,7 +56,7 @@ export default class Server {
          * son funciones que se ejecutan antes de las**********
          * peticiones solicitadas
          ******************************************************/
-        //this.aplicacion.use(morgan('dev'));
+        this.aplicacion.use(morgan('dev'));
         //this.aplicacion.use(chalk);
         /******************************************************
          * configuracion de parametros en el body

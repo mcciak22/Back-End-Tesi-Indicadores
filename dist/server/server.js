@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const morgan = require("morgan");
 //import chalk = require('chalk');
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -41,7 +42,7 @@ class Server {
          * son funciones que se ejecutan antes de las**********
          * peticiones solicitadas
          ******************************************************/
-        //this.aplicacion.use(morgan('dev'));
+        this.aplicacion.use(morgan('dev'));
         //this.aplicacion.use(chalk);
         /******************************************************
          * configuracion de parametros en el body
