@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import MySQL from "../mysql/mysql";
+import JWT from '../middleware/authJWT';
 import moment = require("moment");
 import bcrypt = require("bcrypt");
 
@@ -29,7 +30,7 @@ export default class UsuarioAutenticacion {
       if (error) {
         res.status(400).json({
           ok: false,
-          error: "El usuario no Existe en la Base de Datos.",
+          error: "El usuario no Existe",
           //message: error
         });
       } else {
@@ -55,9 +56,13 @@ export default class UsuarioAutenticacion {
               //message: error
             });
           } else {
+            
+            let user = JSON.stringify(usuario);
+            let json = JSON.parse(user);
+            let token = JWT.GenetarToken(json)
             res.status(200).json({
               ok: true,
-              usuario: usuario[0],
+              Token: token,
             });
           }
           //
