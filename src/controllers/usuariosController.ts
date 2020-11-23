@@ -68,18 +68,25 @@ export default class Usuarios {
   }
 
   public static insertarUsuario(req: Request, res: Response) {
-    let pass = this.hashPassword(req.body.Contraseña);
+    
+    let passtr=req.body.Contraseña.toString();
+    
+    let pass = bcrypt.hashSync(passtr, 10);
+    // console.log(pass);
+    
+
     const body = {
       Nombre: req.body.Nombre,
       Apellidos: req.body.Apellidos,
       Email: req.body.Email,
       Rol: req.body.Rol,
       Contraseña: pass,
-      Foto: req.body.Foto,
+      // Foto: req.body.Foto,
       Carrera: req.body.Carrera,
       Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       Fecha_de_Actualizacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
     };
+    
 
     const queryinsetar = `
     INSERT 
@@ -88,8 +95,7 @@ export default class Usuarios {
      Apellidos, 
      Email, 
      Rol, 
-     Contraseña, 
-     Foto, 
+     Contraseña,
      Carrera, 
      Fecha_de_Creacion, 
      Fecha_de_Actualizacion) 
@@ -98,8 +104,7 @@ export default class Usuarios {
      '${body.Apellidos}',
      '${body.Email}',
      '${body.Rol}',
-     '${body.Contraseña}',
-     '${body.Foto}',
+     '${body.Contraseña}',    
      '${body.Carrera}',
      '${body.Fecha_de_Creacion}',
      '${body.Fecha_de_Actualizacion}')`;
@@ -181,9 +186,10 @@ export default class Usuarios {
         `;
   }
 
-  private static hashPassword(passwordtxt: string) {
-    return bcrypt.hashSync(passwordtxt, 10);
-  }
+  //  static hashPassword(passwordtxt: string):string {
+
+  //   return bcrypt.hashSync(passwordtxt, 10);
+  // }
 
   // public static Auth(req: Request, res: Response){
   //     const body = {

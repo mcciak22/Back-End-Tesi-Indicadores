@@ -28,7 +28,7 @@ export default class UsuarioAutenticacion {
         `;
     MySQL.EjecutarQuery(queryconsulta, (error: any, usuario: Object[]) => {
       if (error) {
-        res.status(400).json({
+        res.status(401).json({
           ok: false,
           error: "El usuario no Existe",
           //message: error
@@ -50,7 +50,7 @@ export default class UsuarioAutenticacion {
             json[0].Contraseña
           );
           if (contraseña2 === false) {
-            res.status(400).json({
+            res.status(401).json({
               ok: false,
               error: "La contraseña es Incorrecta",
               //message: error
