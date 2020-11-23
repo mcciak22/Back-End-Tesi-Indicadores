@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 import MySQL from "../mysql/mysql";
 import moment = require("moment");
 import bcrypt = require("bcrypt");
+import path = require("path");
 /******************los modulos ya no se exportan se crean como instancias de clases.******************/
-export default class Usuarios {
-  /**
-   *
-   */
+export default class UsuariosController {
+  /********************Aqui van las propiedades de las variables****************/
+
   constructor() {}
 
   public static AllUsuarios(req: Request, res: Response) {
     const query = `
-    SELECT 
+    SELECT
     id_usuario,
     Email,
     Nombre,
@@ -68,12 +68,12 @@ export default class Usuarios {
   }
 
   public static insertarUsuario(req: Request, res: Response) {
-    
-    let passtr=req.body.Contraseña.toString();
-    
+
+    let passtr = req.body.Contraseña.toString();
+   
+
     let pass = bcrypt.hashSync(passtr, 10);
     // console.log(pass);
-    
 
     const body = {
       Nombre: req.body.Nombre,
@@ -81,12 +81,11 @@ export default class Usuarios {
       Email: req.body.Email,
       Rol: req.body.Rol,
       Contraseña: pass,
-      // Foto: req.body.Foto,
+      Foto: req.body.Foto,
       Carrera: req.body.Carrera,
       Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       Fecha_de_Actualizacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
     };
-    
 
     const queryinsetar = `
     INSERT 
@@ -128,8 +127,8 @@ export default class Usuarios {
     //console.log(id);
 
     const queryeliminar = `
-        DELETE 
-        FROM   tesi.usuarios 
+        DELETE
+        FROM usuarios
         WHERE (id_usuario = ${id});
         `;
     MySQL.EjecutarQuery(queryeliminar, (error: any, usuario: Object[]) => {
@@ -149,15 +148,17 @@ export default class Usuarios {
   public static actualizarUsuario(req: Request, res: Response) {
     const id = req.params.id;
     const objbody = req.body;
-    const Fecha_de_Actualizacion = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+    const Fecha_de_Actualizacion = moment(new Date()).format(
+      "YYYY-MM-DD HH:mm:ss"
+    );
     const queryactualizar = `
-        UPDATE usuarios 
-        SET 
-        Nombre = '${objbody.Nombre}', 
-        Apellidos = '${objbody.Apellidos}', 
-        Rol = '${objbody.Rol}', 
-        Foto = '${objbody.Foto}', 
-        Carrera = '${objbody.Carrera}' 
+        UPDATE usuarios
+        SET
+        Nombre = '${objbody.Nombre}',
+        Apellidos = '${objbody.Apellidos}',
+        Rol = '${objbody.Rol}',
+        Foto = '${objbody.Foto}',
+        Carrera = '${objbody.Carrera}'
         Fecha_de_Actualizacion = '${Fecha_de_Actualizacion}'
         WHERE (id_usuario = '${id}' );
         `;
@@ -180,23 +181,29 @@ export default class Usuarios {
     const objbody = req.body.Contraseña;
 
     const queryactualizarcontraseña = `
-        UPDATE usuarios 
-        SET Contraseña = '${objbody}' 
+        UPDATE usuarios
+        SET Contraseña = '${objbody}'
         WHERE (id_usuario = '${id}' );
         `;
+    
+
+    MySQL.EjecutarQuery(queryactualizarcontraseña,(error: any, usuario: Object[])=>{
+      if (error) {
+        res.status(400).json({
+          ok: false,
+          errorms: error,
+        });
+      } else {
+        res.status(200).json({
+          ok: true,
+        });
+      }
+    })
   }
+ 
 
-  //  static hashPassword(passwordtxt: string):string {
 
-  //   return bcrypt.hashSync(passwordtxt, 10);
-  // }
+  
 
-  // public static Auth(req: Request, res: Response){
-  //     const body = {
-  //         Username: req.body.Username,
-  //         //Password: bcrypt.compareSync(req.body.password, existingItem.password)
-
-  //     }
-
-  // }
 }
+

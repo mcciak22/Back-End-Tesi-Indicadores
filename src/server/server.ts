@@ -24,10 +24,6 @@ export default class Server {
          ********************************************/
         puerto: number
     ) {
-
-
-
-
         /********************************************************
          * Configuracion del la aplicacion del servidor con el cual 
          * el contructor se inicia primero para el server.
