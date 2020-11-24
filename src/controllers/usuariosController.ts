@@ -115,7 +115,7 @@ export default class UsuariosController {
         if (error.errno === 1062) {
           res.status(400).json({
             ok: false,
-            errorms: `El usuario ${req.body.Email} ya existe intenta con otro Email`,
+            error: `El usuario ${req.body.Email} ya existe intenta con otro Email`,
           });
         } else {
           res.status(400).json({
@@ -142,7 +142,7 @@ export default class UsuariosController {
         FROM usuarios
         WHERE (id_usuario = ${id});
         `;
-    MySQL.EjecutarQuery(queryeliminar, (error: any, usuario: Object[]) => {
+    MySQL.EjecutarQuery(queryeliminar, (error: any, resultado: Object[]) => {
       if (error) {
         res.status(400).json({
           ok: false,
@@ -151,6 +151,7 @@ export default class UsuariosController {
       } else {
         res.status(200).json({
           ok: true,
+          msg:'Se elimino Correctamente el Usuario'
         });
       }
     });
@@ -182,6 +183,7 @@ export default class UsuariosController {
       } else {
         res.status(200).json({
           ok: true,
+          msg:'Se Actualizo correctamente el Usuario'
         });
       }
     });
