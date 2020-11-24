@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import MySQL from "../mysql/mysql";
+import { UserModel } from '../models/usuarioModel';
 import moment = require("moment");
 import bcrypt = require("bcrypt");
 import path = require("path");
@@ -108,12 +109,21 @@ export default class UsuariosController {
      '${body.Fecha_de_Creacion}',
      '${body.Fecha_de_Actualizacion}')`;
 
-    MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: Object) => {
+    MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: UserModel) => {
       if (error) {
-        res.status(400).json({
-          ok: false,
-          errorms: error,
-        });
+
+        if (error.errno === 1062) {
+          res.status(400).json({
+            ok: false,
+            errorms: `El usuario ${req.body.Email} ya existe intenta con otro Email`,
+          });
+        } else {
+          res.status(400).json({
+            ok: false,
+            errorms: error,
+          });
+        }
+        
       } else {
         res.status(200).json({
           ok: true,

@@ -1,22 +1,26 @@
-import { Sequelize ,  DataTypes , Model, Optional} from 'sequelize'
-import { sequelize } from '../instances/sequelize'
+import { Sequelize, DataTypes, Model, Optional } from "sequelize";
+import { sequelize } from "../instances/sequelize";
 
 export interface UserAddModel {
-    email: string
-    password: string
+  Email: string;
+  Contraseña: string;
 }
 
 export interface UserModel extends Model<UserModel> {
-    id: number
-    email: string
-    password: string
-    createdAt: string
-    updatedAt: string
+  id_usuario: number;
+  Nombre: string;
+  Apellidos: string;
+  Email: string;
+  Rol: string;
+  Contraseña: string;
+  Carrera: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface UserViewModel {
-    id: number
-    email: string
+  id_usuario: number;
+  Email: string;
 }
 
 // export const User = sequelize.define<UserModel>('User', {
