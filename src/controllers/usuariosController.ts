@@ -109,7 +109,7 @@ export default class UsuariosController {
      '${body.Fecha_de_Creacion}',
      '${body.Fecha_de_Actualizacion}')`;
 
-    MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: Object[]) => {
+    MySQL.EjecutarQuery(queryinsetar, (error: any, resultado: Object[]) => {
       if (error) {
 
         if (error.errno === 1062) {
@@ -127,6 +127,7 @@ export default class UsuariosController {
       } else {
         res.status(200).json({
           ok: true,
+          resultado: 'Se Agrego Correctamente el Usuario'
         });
       }
     });
