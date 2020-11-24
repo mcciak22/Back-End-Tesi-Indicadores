@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "html": "copyfiles --up 1 src/public/*.html dist",
     "start": "nodemon dist/index.js",
-    "dev" : "nodemon src/index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc -p . && npm run html"
   },
   "author": "",
@@ -52,7 +52,12 @@
     "@types/node": "^14.14.7",
     "@types/sequelize": "^4.28.9",
     "@types/validator": "^13.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
     "copyfiles": "^2.4.0",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.1.2"
   }
