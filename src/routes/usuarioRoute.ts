@@ -13,6 +13,9 @@ router.get(`/api/${Modulo}/:id`, usuariocontroller.OneUsuario);
 router.post(`/api/${Modulo}`, usuariocontroller.insertarUsuario);
 router.delete(`/api/${Modulo}/:id`, usuariocontroller.eliminarUsuario);
 router.put(`/api/${Modulo}/:id`, usuariocontroller.actualizarUsuario);
-router.put(`/api/${Modulo}/password/:id`, usuariocontroller.actualizarContraseña);
+router.put(
+  `/api/${Modulo}/password/:id`,
+  usuariocontroller.actualizarContraseña
+);
 
 module.exports = router;

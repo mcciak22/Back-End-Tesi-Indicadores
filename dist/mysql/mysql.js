@@ -4,25 +4,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_1 = __importDefault(require("mysql"));
-require('dotenv').config();
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 class MySQL {
-    /**
-     *
-     */
     constructor() {
         this.conectado = false;
-        //console.log('Clase inicializada MYSQL');
+        // console.log('Clase inicializada MYSQL');
         this.conexion = mysql_1.default.createConnection({
             host: process.env.DATA_DB_HOST,
             user: process.env.DATA_DB_USER,
             password: process.env.DATA_DB_PASS,
-            database: process.env.DATA_DB_NAME
+            database: process.env.DATA_DB_NAME,
         });
         //this.conexion.connect();
         this.ConectarDB();
     }
     static get instancia() {
-        return this._instance || (this._instance = new this());
+        const status = this.instance || (this.instance = new this());
+        return status;
     }
     static EjecutarQuery(query, callback) {
         //desde el metodo de la instancia es un get una propiedad que puede alcanzar a toda la clase

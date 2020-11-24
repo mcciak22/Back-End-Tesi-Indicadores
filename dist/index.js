@@ -7,7 +7,7 @@ const server_1 = __importDefault(require("./server/server"));
 const mysql_1 = __importDefault(require("./mysql/mysql"));
 //const usuariosrutas = require('./router/usuarioRoute')
 /*********************************
-********Servidor inicializado*****
+ ********Servidor inicializado*****
  *********************************/
 const server = server_1.default.init(3000);
 //const myqls = new MySQL();
