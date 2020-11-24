@@ -30,7 +30,7 @@ export default class MySQL {
 
   public static EjecutarQuery(query: string, callback: Function): void {
     //desde el metodo de la instancia es un get una propiedad que puede alcanzar a toda la clase
-    this.instancia.conexion.query(query, (error, results: [], fields: any) => {
+    this.instancia.conexion.query(query, (error, results: any, fields: any) => {
       if (error) {
         //console.log('Error en el query');
         //console.log(error);
