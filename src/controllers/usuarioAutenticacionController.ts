@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import MySQL from "../mysql/mysql";
 import JWT from '../middleware/authJWT';
-import moment = require("moment");
-import bcrypt = require("bcrypt");
+import moment from 'moment';
+import bcrypt from "bcrypt";
 
 export default class UsuarioAutenticacion {
   constructor() {}

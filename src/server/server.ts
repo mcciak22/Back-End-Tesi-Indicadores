@@ -1,9 +1,10 @@
-import express = require('express');
-import morgan = require('morgan');
+import express from 'express';
+import morgan from 'morgan';
 //import chalk = require('chalk');
-import path = require('path');
-import bodyParser = require('body-parser');
-import cors = require('cors');
+import path from 'path';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+//import {router} from '../router/indexRouter';
 
 //inicializando el servidor de node
 //esta clase se importad por default
@@ -63,7 +64,7 @@ export default class Server {
         this.aplicacion.use(bodyParser.json()); // support json encoded bodies
         this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
         /*****************CONFIGURACION GLOBAL DE RUTAS*************************************/
-        this.aplicacion.use(require('../router/indexRouter'));
+        //this.aplicacion.use(router);
     }
     //este es el metodo que se llame para inicializar una vez buena practica
     static init(puerto: number) {

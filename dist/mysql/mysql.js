@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mysql = require("mysql");
+const mysql_1 = __importDefault(require("mysql"));
 require('dotenv').config();
 class MySQL {
     /**
@@ -9,7 +12,7 @@ class MySQL {
     constructor() {
         this.conectado = false;
         //console.log('Clase inicializada MYSQL');
-        this.conexion = mysql.createConnection({
+        this.conexion = mysql_1.default.createConnection({
             host: process.env.DATA_DB_HOST,
             user: process.env.DATA_DB_USER,
             password: process.env.DATA_DB_PASS,

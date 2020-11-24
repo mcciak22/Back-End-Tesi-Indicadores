@@ -1,11 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require("express");
-const morgan = require("morgan");
+const express_1 = __importDefault(require("express"));
+const morgan_1 = __importDefault(require("morgan"));
 //import chalk = require('chalk');
-const path = require("path");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const path_1 = __importDefault(require("path"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const cors_1 = __importDefault(require("cors"));
+//import {router} from '../router/indexRouter';
 //inicializando el servidor de node
 //esta clase se importad por default
 class Server {
@@ -24,7 +28,7 @@ class Server {
         /**********************************************
          * Inicializar el valor del servidor de expess*
          **********************************************/
-        this.aplicacion = express();
+        this.aplicacion = express_1.default();
         // var app = require('../routes/indexRoutes')(this.aplicacion);
         //var app2 = app(this.aplicacion);
         //console.log(app);
@@ -35,33 +39,33 @@ class Server {
         this.aplicacion.set('port', process.env.APP_PORT || 3000);
         //Motor de plantillas
         this.aplicacion.set('view engine', 'ejs');
-        this.aplicacion.set('views', path.join(__dirname, 'views'));
+        this.aplicacion.set('views', path_1.default.join(__dirname, 'views'));
         /******************************************************
          * Configurando el middleware**************************
          * Que es el middleware********************************
          * son funciones que se ejecutan antes de las**********
          * peticiones solicitadas
          ******************************************************/
-        this.aplicacion.use(morgan('dev'));
+        this.aplicacion.use(morgan_1.default('dev'));
         //this.aplicacion.use(chalk);
         /******************************************************
          * configuracion de parametros en el body
          *
          */
         // this.aplicacion.use(routes(this.aplicacion))
-        this.aplicacion.use(cors());
-        this.aplicacion.use(bodyParser.json()); // support json encoded bodies
-        this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+        this.aplicacion.use(cors_1.default());
+        this.aplicacion.use(body_parser_1.default.json()); // support json encoded bodies
+        this.aplicacion.use(body_parser_1.default.urlencoded({ extended: true })); // support encoded bodies
         /*****************CONFIGURACION GLOBAL DE RUTAS*************************************/
-        this.aplicacion.use(require('../router/indexRouter'));
+        //this.aplicacion.use(router);
     }
     //este es el metodo que se llame para inicializar una vez buena practica
     static init(puerto) {
         return new Server(puerto);
     }
     publicfolder() {
-        const publicpath = path.resolve(__dirname, '../public');
-        this.aplicacion.use(express.static(publicpath));
+        const publicpath = path_1.default.resolve(__dirname, '../public');
+        this.aplicacion.use(express_1.default.static(publicpath));
     }
     start(callback) {
         //servidor escuchando.

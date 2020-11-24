@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import MySQL from "../mysql/mysql";
-import { UserModel } from '../models/usuarioModel';
-import moment = require("moment");
-import bcrypt = require("bcrypt");
-import path = require("path");
+import moment from "moment";
+import bcrypt from 'bcrypt';
+
 /******************los modulos ya no se exportan se crean como instancias de clases.******************/
 export default class UsuariosController {
   /********************Aqui van las propiedades de las variables****************/
