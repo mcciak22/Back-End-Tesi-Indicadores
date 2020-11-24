@@ -10,5 +10,5 @@ const Modulo = 'auth';
 /**************URL DE USUARIOS******************************/
 router.post(`/api/${Modulo}`, autenticacioncontroller.Autenticacion);
 
-module.exports = router;
-//export default router;
+//module.exports = router;
+export default router;

@@ -56,7 +56,7 @@ export default class UsuarioAutenticacion {
           } else {
             const user = JSON.stringify(usuario);
             const serial = JSON.parse(user);
-            const token = JWT.GenetarToken(serial);
+            const token = JWT.GenetarToken(serial[0]);
             res.status(200).json({
               ok: true,
               Token: token,

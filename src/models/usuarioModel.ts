@@ -1,5 +1,5 @@
-import { Sequelize, DataTypes, Model, Optional } from "sequelize";
-import { sequelize } from "../instances/sequelize";
+import { Sequelize, DataTypes, Model } from 'sequelize';
+import { sequelize } from '../instances/sequelize';
 
 export interface UserAddModel {
   Email: string;
@@ -7,7 +7,7 @@ export interface UserAddModel {
 }
 
 export interface UserModel extends Model<UserModel> {
-  id_usuario: number;
+  id_Usuario: number;
   Nombre: string;
   Apellidos: string;
   Email: string;
@@ -19,7 +19,7 @@ export interface UserModel extends Model<UserModel> {
 }
 
 export interface UserViewModel {
-  id_usuario: number;
+  id_Usuario: number;
   Email: string;
 }
 

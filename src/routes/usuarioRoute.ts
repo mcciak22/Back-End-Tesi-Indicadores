@@ -1,7 +1,8 @@
-import { Router } from "express";
-import usuariocontroller from "../controllers/usuariosController";
+import { Router } from 'express';
+import usuariocontroller from '../controllers/usuariosController';
+
 const router = Router();
-const Modulo = "usuarios";
+const Modulo = 'usuarios';
 
 /**********************
  * URLs DEL SERVIDOR QUe VA A MANEJAR.
@@ -18,4 +19,6 @@ router.put(
   usuariocontroller.actualizarContraseña
 );
 
-module.exports = router;
+//module.exports = router;
+//exportamos el modulo de usuarios route
+export default router;

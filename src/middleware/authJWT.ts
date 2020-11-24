@@ -1,16 +1,17 @@
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
+import { UserModel } from '../models/usuarioModel';
 
 export default class JWT {
-  public static GenetarToken(user: any): string {
-    // console.log(user[0]);
+  public static GenetarToken(user: UserModel): string {
+    // console.log(user);
 
     const payload = {
-      id: user[0].id_usuario,
-      Email: user[0].Email,
-      Nombre: user[0].Nombre,
-      Apellidos: user[0].Apellidos,
-      Rol: user[0].Rol,
+      id: user.id_Usuario,
+      Email: user.Email,
+      Nombre: user.Nombre,
+      Apellidos: user.Apellidos,
+      Rol: user.Rol,
       iat: moment().unix(),
       exp: moment().add(14, 'days').unix(),
     };
