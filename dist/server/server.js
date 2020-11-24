@@ -9,7 +9,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const path_1 = __importDefault(require("path"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
-//import {router} from '../router/indexRouter';
+const indexRouter_1 = __importDefault(require("../router/indexRouter"));
 //inicializando el servidor de node
 //esta clase se importad por default
 class Server {
@@ -57,7 +57,7 @@ class Server {
         this.aplicacion.use(body_parser_1.default.json()); // support json encoded bodies
         this.aplicacion.use(body_parser_1.default.urlencoded({ extended: true })); // support encoded bodies
         /*****************CONFIGURACION GLOBAL DE RUTAS*************************************/
-        //this.aplicacion.use(router);
+        this.aplicacion.use(indexRouter_1.default);
     }
     //este es el metodo que se llame para inicializar una vez buena practica
     static init(puerto) {

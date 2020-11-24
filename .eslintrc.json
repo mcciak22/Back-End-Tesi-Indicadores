@@ -32,6 +32,7 @@
         "arrow-parens":"off",
         "comma-dangle":"off",
         "spaced-comment": "off",
-        "object-curly-newline": "off"
+        "object-curly-newline": "off",
+        "import/extensions": "off"
     }
 }

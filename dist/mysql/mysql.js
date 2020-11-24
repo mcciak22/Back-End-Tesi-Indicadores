@@ -27,9 +27,10 @@ class MySQL {
         //desde el metodo de la instancia es un get una propiedad que puede alcanzar a toda la clase
         this.instancia.conexion.query(query, (error, results, fields) => {
             if (error) {
-                console.log('Error en el query');
-                console.log(error);
-                return callback(error);
+                //console.log('Error en el query');
+                //console.log(error);
+                //return callback(error);
+                callback(error);
             }
             if (results.length === 0) {
                 callback('El registro solicitado no existe');
@@ -42,12 +43,12 @@ class MySQL {
     ConectarDB() {
         this.conexion.connect((err) => {
             if (err) {
-                console.log(err.message);
-                return;
+                //console.log(err.message);
+                //return err;
             }
             else {
                 this.conectado = true;
-                console.log('Base de datos Conectado: ' + this.conectado);
+                //console.log(`Base de datos Conectado: ${this.conectado}`);
             }
         });
     }

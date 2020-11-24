@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import MySQL from "../mysql/mysql";
-import moment from "moment";
+import { Request, Response } from 'express';
+import MySQL from '../mysql/mysql';
+import moment from 'moment';
 import bcrypt from 'bcrypt';
 
 /******************los modulos ya no se exportan se crean como instancias de clases.******************/
@@ -68,9 +68,7 @@ export default class UsuariosController {
   }
 
   public static insertarUsuario(req: Request, res: Response) {
-
     let passtr = req.body.Contraseña.toString();
-   
 
     let pass = bcrypt.hashSync(passtr, 10);
     // console.log(pass);
@@ -83,8 +81,8 @@ export default class UsuariosController {
       Contraseña: pass,
       Foto: req.body.Foto,
       Carrera: req.body.Carrera,
-      Fecha_de_Creacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-      Fecha_de_Actualizacion: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+      Fecha_de_Creacion: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      Fecha_de_Actualizacion: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
     };
 
     const queryinsetar = `
@@ -110,7 +108,6 @@ export default class UsuariosController {
 
     MySQL.EjecutarQuery(queryinsetar, (error: any, resultado: Object[]) => {
       if (error) {
-
         if (error.errno === 1062) {
           res.status(400).json({
             ok: false,
@@ -122,11 +119,10 @@ export default class UsuariosController {
             errorms: error,
           });
         }
-        
       } else {
         res.status(200).json({
           ok: true,
-          resultado: 'Se Agrego Correctamente el Usuario'
+          resultado: 'Se Agrego Correctamente el Usuario',
         });
       }
     });
@@ -150,7 +146,7 @@ export default class UsuariosController {
       } else {
         res.status(200).json({
           ok: true,
-          msg:'Se elimino Correctamente el Usuario'
+          msg: 'Se elimino Correctamente el Usuario',
         });
       }
     });
@@ -160,7 +156,7 @@ export default class UsuariosController {
     const id = req.params.id;
     const objbody = req.body;
     const Fecha_de_Actualizacion = moment(new Date()).format(
-      "YYYY-MM-DD HH:mm:ss"
+      'YYYY-MM-DD HH:mm:ss'
     );
     const queryactualizar = `
         UPDATE usuarios
@@ -182,7 +178,7 @@ export default class UsuariosController {
       } else {
         res.status(200).json({
           ok: true,
-          msg:'Se Actualizo correctamente el Usuario'
+          msg: 'Se Actualizo correctamente el Usuario',
         });
       }
     });
@@ -197,25 +193,21 @@ export default class UsuariosController {
         SET Contraseña = '${objbody}'
         WHERE (id_usuario = '${id}' );
         `;
-    
 
-    MySQL.EjecutarQuery(queryactualizarcontraseña,(error: any, usuario: Object[])=>{
-      if (error) {
-        res.status(400).json({
-          ok: false,
-          errorms: error,
-        });
-      } else {
-        res.status(200).json({
-          ok: true,
-        });
+    MySQL.EjecutarQuery(
+      queryactualizarcontraseña,
+      (error: any, usuario: Object[]) => {
+        if (error) {
+          res.status(400).json({
+            ok: false,
+            errorms: error,
+          });
+        } else {
+          res.status(200).json({
+            ok: true,
+          });
+        }
       }
-    })
+    );
   }
- 
-
-
-  
-
 }
-

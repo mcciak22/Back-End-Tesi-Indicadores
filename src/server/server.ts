@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import path from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-//import {router} from '../router/indexRouter';
+import router from '../router/indexRouter';
 
 //inicializando el servidor de node
 //esta clase se importad por default
@@ -14,6 +14,7 @@ export default class Server {
    * ejecuta el servidor con la funcion init.
    ********************************************************/
   public aplicacion: express.Application;
+
   public puerto: number;
 
   constructor(
@@ -63,7 +64,7 @@ export default class Server {
     this.aplicacion.use(bodyParser.json()); // support json encoded bodies
     this.aplicacion.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
     /*****************CONFIGURACION GLOBAL DE RUTAS*************************************/
-    //this.aplicacion.use(router);
+    this.aplicacion.use(router);
   }
 
   //este es el metodo que se llame para inicializar una vez buena practica

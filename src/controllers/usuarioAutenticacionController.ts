@@ -1,13 +1,11 @@
-import { Request, Response } from "express";
-import MySQL from "../mysql/mysql";
+import { Request, Response } from 'express';
+import mysql from 'mysql';
+import bcrypt from 'bcrypt';
+import MySQL from '../mysql/mysql';
 import JWT from '../middleware/authJWT';
-import moment from 'moment';
-import bcrypt from "bcrypt";
 
 export default class UsuarioAutenticacion {
-  constructor() {}
-
-  public static Autenticacion(req: Request, res: Response) {
+  public static Autenticacion(req: Request, res: Response): void {
     const body = {
       Email: req.body.Email,
       Password: req.body.Password,
@@ -26,11 +24,11 @@ export default class UsuarioAutenticacion {
         FROM tesi.usuarios
         WHERE Email = '${body.Email}'
         `;
-    MySQL.EjecutarQuery(queryconsulta, (error: any, usuario: Object[]) => {
+    MySQL.EjecutarQuery(queryconsulta, (error: any, usuario: any[]) => {
       if (error) {
         res.status(401).json({
           ok: false,
-          error: "El usuario no Existe",
+          error: 'El usuario no Existe',
           //message: error
         });
       } else {
@@ -41,35 +39,29 @@ export default class UsuarioAutenticacion {
                 WHERE Email = '${body.Email}'
 
                 `;
-        MySQL.EjecutarQuery(querylogin, (error: any, password: Object[]) => {
-          let contraseña = JSON.stringify(password);
-          let json = JSON.parse(contraseña);
+        MySQL.EjecutarQuery(querylogin, (err: mysql.MysqlError, password: string[]) => {
+          const contraseña = JSON.stringify(password);
+          const json = JSON.parse(contraseña);
 
-          let contraseña2 = bcrypt.compareSync(
+          const contraseña2 = bcrypt.compareSync(
             req.body.Password,
             json[0].Contraseña
           );
           if (contraseña2 === false) {
             res.status(401).json({
               ok: false,
-              error: "La contraseña es Incorrecta",
+              error: 'La contraseña es Incorrecta',
               //message: error
             });
           } else {
-            
-            let user = JSON.stringify(usuario);
-            let json = JSON.parse(user);
-            let token = JWT.GenetarToken(json)
+            const user = JSON.stringify(usuario);
+            const serial = JSON.parse(user);
+            const token = JWT.GenetarToken(serial);
             res.status(200).json({
               ok: true,
               Token: token,
             });
           }
-          //
-          // res.status(200).json({
-          //     ok: true,
-          //     usuario:usuario[0]
-          // })
         });
       }
     });
