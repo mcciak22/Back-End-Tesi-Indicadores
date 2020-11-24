@@ -1,15 +1,14 @@
 import { Request, Response } from 'express';
-import MySQL from '../mysql/mysql';
-import moment from 'moment';
 import bcrypt from 'bcrypt';
+import moment from 'moment';
+import MySQL from '../mysql/mysql';
 
-/******************los modulos ya no se exportan se crean como instancias de clases.******************/
+/***************los modulos ya no se exportan se crean como instancias de clases.**************/
+
 export default class UsuariosController {
   /********************Aqui van las propiedades de las variables****************/
 
-  constructor() {}
-
-  public static AllUsuarios(req: Request, res: Response) {
+  public static AllUsuarios(req: Request, res: Response): void {
     const query = `
     SELECT
     id_usuario,
@@ -24,14 +23,21 @@ export default class UsuariosController {
 
     MySQL.EjecutarQuery(query, (error: any, usuarios: Object[]) => {
       if (error) {
-        res.status(400).json({
-          ok: false,
-          errorms: error,
-        });
+        if (error.length === 0) {
+          res.json({
+            ok: true,
+            usuarios: [],
+          });
+        } else {
+          res.status(400).json({
+            ok: false,
+            errorms: error,
+          });
+        }
       } else {
         res.json({
           ok: true,
-          usuarios: usuarios,
+          usuarios,
         });
       }
     });
