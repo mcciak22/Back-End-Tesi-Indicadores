@@ -109,7 +109,7 @@ export default class UsuariosController {
      '${body.Fecha_de_Creacion}',
      '${body.Fecha_de_Actualizacion}')`;
 
-    MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: UserModel) => {
+    MySQL.EjecutarQuery(queryinsetar, (error: any, usuario: Object[]) => {
       if (error) {
 
         if (error.errno === 1062) {
