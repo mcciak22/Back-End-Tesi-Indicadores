@@ -28,15 +28,15 @@ export default class MySQL {
     return status;
   }
 
-  public static EjecutarQuery(query: string, callback: Function): void {
+  public static EjecutarQuery(query: string, callback: Function): any {
     //desde el metodo de la instancia es un get una propiedad que puede alcanzar a toda la clase
     this.instancia.conexion.query(query, (error, results: any, fields: any) => {
       if (error) {
         //console.log('Error en el query');
         //console.log(error);
 
-        //return callback(error);
-        callback(error);
+        return callback(error);
+        //callback(error);
       }
 
       if (results.length === 0) {

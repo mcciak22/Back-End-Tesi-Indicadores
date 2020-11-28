@@ -29,8 +29,8 @@ class MySQL {
             if (error) {
                 //console.log('Error en el query');
                 //console.log(error);
-                //return callback(error);
-                callback(error);
+                return callback(error);
+                //callback(error);
             }
             if (results.length === 0) {
                 callback(results);

@@ -43,9 +43,9 @@ export default class UsuariosController {
     });
   }
 
-  public static OneUsuario(req: Request, res: Response) {
+  public static OneUsuario(req: Request, res: Response): void {
     //este es el parametro que se consulta desde la url
-    const id = req.params.id;
+    const id = req.params.id.valueOf();
     const escaparcaracteres = MySQL.instancia.conexion.escape(id);
     // res.json({
     //     ok:true,
@@ -73,10 +73,10 @@ export default class UsuariosController {
     });
   }
 
-  public static insertarUsuario(req: Request, res: Response) {
-    let passtr = req.body.Contraseña.toString();
+  public static insertarUsuario(req: Request, res: Response): void {
+    const passtr = req.body.Contraseña.toString();
 
-    let pass = bcrypt.hashSync(passtr, 10);
+    const pass = bcrypt.hashSync(passtr, 10);
     // console.log(pass);
 
     const body = {
@@ -134,8 +134,8 @@ export default class UsuariosController {
     });
   }
 
-  public static eliminarUsuario(req: Request, res: Response) {
-    const id = req.params.id;
+  public static eliminarUsuario(req: Request, res: Response): void {
+    const id = req.params.id.valueOf();
     //console.log(id);
 
     const queryeliminar = `
@@ -158,10 +158,10 @@ export default class UsuariosController {
     });
   }
 
-  public static actualizarUsuario(req: Request, res: Response) {
-    const id = req.params.id;
+  public static actualizarUsuario(req: Request, res: Response): void {
+    const id = req.params.id.valueOf();
     const objbody = req.body;
-    const Fecha_de_Actualizacion = moment(new Date()).format(
+    const FechadeActualizacion = moment(new Date()).format(
       'YYYY-MM-DD HH:mm:ss'
     );
     const queryactualizar = `
@@ -172,7 +172,7 @@ export default class UsuariosController {
         Rol = '${objbody.Rol}',
         Foto = '${objbody.Foto}',
         Carrera = '${objbody.Carrera}'
-        Fecha_de_Actualizacion = '${Fecha_de_Actualizacion}'
+        Fecha_de_Actualizacion = '${FechadeActualizacion}'
         WHERE (id_usuario = '${id}' );
         `;
     MySQL.EjecutarQuery(queryactualizar, (error: any, usuario: Object[]) => {
@@ -190,8 +190,8 @@ export default class UsuariosController {
     });
   }
 
-  public static actualizarContraseña(req: Request, res: Response) {
-    const id = req.params.id;
+  public static actualizarContraseña(req: Request, res: Response): void {
+    const id = req.params.id.valueOf();
     const objbody = req.body.Contraseña;
 
     const queryactualizarcontraseña = `
