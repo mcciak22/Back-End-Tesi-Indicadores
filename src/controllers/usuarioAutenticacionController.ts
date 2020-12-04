@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import mysql from 'mysql';
 import bcrypt from 'bcrypt';
 import MySQL from '../mysql/mysql';
 import JWT from '../middleware/authJWT';
@@ -37,9 +36,9 @@ export default class UsuarioAutenticacion {
                 Contraseña
                 FROM tesi.usuarios
                 WHERE Email = '${body.Email}'
-
                 `;
-        MySQL.EjecutarQuery(querylogin, (err: mysql.MysqlError, password: string[]) => {
+
+        MySQL.EjecutarQuery(querylogin, (err: any, password: string[]) => {
           const contraseña = JSON.stringify(password);
           const json = JSON.parse(contraseña);
 
