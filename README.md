@@ -26,3 +26,15 @@ para iniciar el servidor de la api.
 ##### GET `api/usuario/(id)` trae al usurio especifico por id de usuario
 ##### DELETE `api/usuario/(id)` elimina al usuario especifico por id de usuario
 ##### POST `api/usuario` inserta un registro de usuario nuevo.
+
+# Nota
+Si la base de Datos no conecta o si manda un error en PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR problablemente 
+tendras que habilidar el inision de sesion por medio de contraseñas
+### Paso 1
+Habilitar el identificador de mysq por medio de la contraseña y ejecutar el siguente comando
+#### ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password' 
+
+### Paso 2
+Hacer un refresh a la base de datos con el siguiente comando.
+#### flush privileges;
+y listo tendras el acceso o conexion a la base de datos mysql

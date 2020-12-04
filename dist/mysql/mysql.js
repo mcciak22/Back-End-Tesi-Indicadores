@@ -15,8 +15,8 @@ class MySQL {
             user: process.env.DATA_DB_USER,
             password: process.env.DATA_DB_PASS,
             database: process.env.DATA_DB_NAME,
+            port: Number.parseInt(process.env.DATA_DB_PORT)
         });
-        //this.conexion.connect();
         this.ConectarDB();
     }
     static get instancia() {
@@ -43,12 +43,12 @@ class MySQL {
     ConectarDB() {
         this.conexion.connect((err) => {
             if (err) {
-                //console.log(err.message);
+                console.log(err.message);
                 //return err;
             }
             else {
                 this.conectado = true;
-                //console.log(`Base de datos Conectado: ${this.conectado}`);
+                console.log(`Base de datos Conectado: ${this.conectado}`);
             }
         });
     }

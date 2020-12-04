@@ -18,8 +18,9 @@ export default class MySQL {
       user: process.env.DATA_DB_USER,
       password: process.env.DATA_DB_PASS,
       database: process.env.DATA_DB_NAME,
+      port: Number.parseInt(process.env.DATA_DB_PORT!)
     });
-    //this.conexion.connect();
+
     this.ConectarDB();
   }
 
@@ -50,11 +51,13 @@ export default class MySQL {
   private ConectarDB() {
     this.conexion.connect((err: mysql.MysqlError) => {
       if (err) {
-        //console.log(err.message);
+        this.conectado = false;
+        console.log(err.message);
+        console.log(`Estado de la Base de datos: ${this.conectado}`);
         //return err;
       } else {
         this.conectado = true;
-        //console.log(`Base de datos Conectado: ${this.conectado}`);
+        console.log(`Estado de la Base de datos: ${this.conectado}`);
       }
     });
   }
