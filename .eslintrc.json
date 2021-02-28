@@ -33,6 +33,6 @@
         "comma-dangle":"off",
         "spaced-comment": "off",
         "object-curly-newline": "off",
-        "import/extensions": "off"
+        "import/extensions": "off"    
     }
 }

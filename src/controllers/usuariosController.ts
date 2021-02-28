@@ -43,6 +43,14 @@ export default class UsuariosController {
     });
   }
 
+  public static InsertAllUsers(req:Request, res:Response) : void
+  {
+    const paramsinsert = req.body.paramsinsert;
+    console.log(paramsinsert);
+    
+    res.json({array:paramsinsert})
+  }
+
   public static OneUsuario(req: Request, res: Response): void {
     //este es el parametro que se consulta desde la url
     const id = req.params.id.valueOf();

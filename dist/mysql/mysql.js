@@ -43,12 +43,14 @@ class MySQL {
     ConectarDB() {
         this.conexion.connect((err) => {
             if (err) {
+                this.conectado = false;
                 console.log(err.message);
+                console.log(`Estado de la Base de datos: ${this.conectado}`);
                 //return err;
             }
             else {
                 this.conectado = true;
-                console.log(`Base de datos Conectado: ${this.conectado}`);
+                console.log(`Estado de la Base de datos: ${this.conectado}`);
             }
         });
     }

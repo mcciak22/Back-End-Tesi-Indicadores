@@ -12,6 +12,7 @@ const Modulo = 'usuarios';
 router.get(`/api/${Modulo}`, usuariocontroller.AllUsuarios);
 router.get(`/api/${Modulo}/:id`, usuariocontroller.OneUsuario);
 router.post(`/api/${Modulo}`, usuariocontroller.insertarUsuario);
+router.post(`/api/${Modulo}/variosusuarios`, usuariocontroller.InsertAllUsers);
 router.delete(`/api/${Modulo}/:id`, usuariocontroller.eliminarUsuario);
 router.put(`/api/${Modulo}/:id`, usuariocontroller.actualizarUsuario);
 router.put(
